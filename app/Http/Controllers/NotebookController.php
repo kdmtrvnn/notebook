@@ -105,4 +105,47 @@ class NotebookController extends Controller
 
         return view('notebooks.index', compact('notebooks'));
     }
+
+    /**
+     * @OA\Get(
+     *    path="/api/v1/notebooks/{id}",
+     *    tags={"Notebook"},
+     *    summary="Show notebook",
+     *    description="Show notebook",
+     *     @OA\Response(
+     *          response=200, description="Success",
+     *          @OA\JsonContent(
+     *             @OA\Property(
+     *                property="data",
+     *                type="object",
+     *                example={
+     *                  "type": "notebook",
+     *                  "id": "1",
+     *                  "attributes": {
+     *                      "surname": "Иванов",
+     *                      "name": "Иван",
+     *                      "patronymic": "Иванович",
+     *                      "campaign": "Газпром",
+     *                      "phone": "89600710772",
+     *                      "email": "qwe@mail.ru",
+     *                      "date_of_birth": "29.11.1996",
+     *                      "image": "/public/images",},
+     *                },
+     *          )))
+     *       )
+     *  )
+     */
+    public function show($id)
+    {
+        $notebook = Notebook::findOrFail($id);
+        $notebook = fractal()
+            ->item($notebook)
+            ->transformWith(new NotebookTransformer())
+            ->serializeWith(new JsonApiSerializer())
+            ->withResourceName('notebook')
+            ->respond()
+            ->getData();
+
+        return view('notebooks.show', compact('notebook'));
+    }
 }

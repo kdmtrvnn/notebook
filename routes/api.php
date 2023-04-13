@@ -23,5 +23,7 @@ Route::group(['prefix' => 'v1'], function () {
     Route::group(['prefix' => 'notebooks'], function () {
         Route::get('/', [NotebookController::class, 'get'])
             ->name('notebooks.get');
+        Route::get('/{id}', [NotebookController::class, 'show'])
+            ->name('notebooks.show');
     });
 });

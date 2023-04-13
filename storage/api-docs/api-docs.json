@@ -93,6 +93,47 @@
                     }
                 }
             }
+        },
+        "/api/v1/notebooks/{id}": {
+            "get": {
+                "tags": [
+                    "Notebook"
+                ],
+                "summary": "Show notebook",
+                "description": "Show notebook",
+                "operationId": "03d932ac7745dac1bf7a94bc72e3abf8",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "example": {
+                                                "type": "notebook",
+                                                "id": "1",
+                                                "attributes": {
+                                                    "surname": "Иванов",
+                                                    "name": "Иван",
+                                                    "patronymic": "Иванович",
+                                                    "campaign": "Газпром",
+                                                    "phone": "89600710772",
+                                                    "email": "qwe@mail.ru",
+                                                    "date_of_birth": "29.11.1996",
+                                                    "image": "/public/images"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
