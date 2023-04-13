@@ -159,7 +159,7 @@
                     }
                 },
                 "responses": {
-                    "200": {
+                    "302": {
                         "description": "Success"
                     }
                 }
@@ -282,7 +282,7 @@
                     }
                 },
                 "responses": {
-                    "200": {
+                    "302": {
                         "description": "Success"
                     }
                 }
