@@ -35,5 +35,8 @@ Route::group(['prefix' => 'v1'], function () {
 
         Route::post('/{id}', [NotebookController::class, 'update'])
             ->name('notebooks.update');
+
+        Route::delete('/{id}', [NotebookController::class, 'delete'])
+            ->name('notebooks.delete');
     });
 });

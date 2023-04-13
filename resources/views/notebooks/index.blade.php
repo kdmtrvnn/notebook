@@ -21,10 +21,15 @@
                 <h7 class="fw-normal"> Email: {{ $notebook->attributes->email }} </h7><br>
                 <h7 class="fw-normal">
                     Дата рождения: {{ $notebook->attributes->date_of_birth ? $notebook->attributes->date_of_birth : null }}
-                </h7>
+                </h7><br>
                 @if($notebook->attributes->image !== null)
                 <img src="{{Storage::url($notebook->attributes->image)}}" width="200"><br>
                 @endif
+                <form method="post" action="{{ route('notebooks.delete', ['id' => $notebook->id]) }}">
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit" class="btn btn-outline-info mt-2">Удалить</button>
+                </form>
             </div>
         </div>
     </div>

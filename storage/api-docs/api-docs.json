@@ -287,6 +287,32 @@
                     }
                 }
             }
+        },
+        "api/v1/notebooks/{id}": {
+            "delete": {
+                "tags": [
+                    "Notebooks/delete"
+                ],
+                "summary": "Delete Notebook",
+                "description": "Delete Notebook",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of Notebook",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "Success"
+                    }
+                }
+            }
         }
     }
 }

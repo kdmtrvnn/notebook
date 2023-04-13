@@ -177,7 +177,7 @@ class NotebookController extends Controller
      *         ),
      *      ),
      *     @OA\Response(
-     *          response=200, description="Success",
+     *          response=302, description="Success",
      *       )
      *  )
      */
@@ -224,7 +224,7 @@ class NotebookController extends Controller
      *     ),
      *     ),
      *     @OA\Response(
-     *          response=200, description="Success",
+     *          response=302, description="Success",
      *       )
      *  )
      */
@@ -242,6 +242,31 @@ class NotebookController extends Controller
             'email' => $request->email,
             'date_of_birth' => $request->date_of_birth ? $request->date_of_birth : null,
             ]);
+
+        return redirect()->back();
+    }
+
+    /**
+     * @OA\Delete(
+     *    path="api/v1/notebooks/{id}",
+     *    operationId="destroy",
+     *    tags={"Notebooks/delete"},
+     *    summary="Delete Notebook",
+     *    description="Delete Notebook",
+     *    @OA\Parameter(name="id", in="path", description="Id of Notebook", required=true,
+     *        @OA\Schema(type="integer")
+     *    ),
+     *    @OA\Response(
+     *         response=302,
+     *         description="Success",
+     *       )
+     *      )
+     *  )
+     */
+    public function delete($id)
+    {
+        $notebook = Notebook::findOrFail($id);
+        $notebook->delete();
 
         return redirect()->back();
     }
