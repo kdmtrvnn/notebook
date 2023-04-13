@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Notebook;
+use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
 class StoreNotebookTest extends TestCase
@@ -21,7 +22,7 @@ class StoreNotebookTest extends TestCase
                     'phone' => 'phone',
                     'email' => 'email@mail.ru',
                     'date_of_birth' => 'test_name',
-//                    'image' => 'test_name',
+                    'image' => UploadedFile::fake()->image('avatar1.jpg'),
                 ]
             ],
             'request_2' => [
@@ -260,6 +261,21 @@ class StoreNotebookTest extends TestCase
                 ],
                 'expected_errors' => [
                     ['The date of birth must be a string.'],
+                ],
+            ],
+            'image_invalid_type' => [
+                'request' => [
+                    'surname' => 'surname',
+                    'name' => 'name',
+                    'patronymic' => 'patronymic',
+                    'campaign' => 'campaign',
+                    'phone' => 'phone',
+                    'email' => 'email@mail.ru',
+                    'date_of_birth' => 'date_of_birth',
+                    'image' => 'image',
+                ],
+                'expected_errors' => [
+                    ['The image must be a file.'],
                 ],
             ],
         ];

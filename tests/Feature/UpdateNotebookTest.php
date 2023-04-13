@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Notebook;
+use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
 class UpdateNotebookTest extends TestCase
@@ -21,7 +22,7 @@ class UpdateNotebookTest extends TestCase
                     'phone' => 'phone',
                     'email' => 'email@mail.ru',
                     'date_of_birth' => 'test_name',
-//                    'image' => 'test_name',
+                    'image' => UploadedFile::fake()->image('avatar1.jpg'),
                 ]
             ],
             'request_2' => [
@@ -62,7 +63,11 @@ class UpdateNotebookTest extends TestCase
         self::assertNotEquals($notebookBeforeUpdate, $notebookAfterUpdate);
 
         foreach ($request as $key => $value) {
-            self::assertEquals($notebookAfterUpdate->$key, $value);
+            if ($key !== 'image') {
+                self::assertEquals($notebookAfterUpdate->$key, $value);
+            } else {
+                self::assertNotEquals($notebookBeforeUpdate->image, $notebookAfterUpdate->image);
+            }
         }
     }
 }
