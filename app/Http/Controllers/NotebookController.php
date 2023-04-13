@@ -103,7 +103,6 @@ class NotebookController extends Controller
             ->respond()
             ->getData();
 
-//        dd($notebooks);
         return view('notebooks.index', compact('notebooks'));
     }
 }

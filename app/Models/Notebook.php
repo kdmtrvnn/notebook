@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Database\Factories\NotebookFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -20,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Notebook extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'surname',
         'name',
@@ -30,4 +33,9 @@ class Notebook extends Model
         'date_of_birth',
         'image',
     ];
+
+    protected static function newFactory(): NotebookFactory
+    {
+        return new NotebookFactory();
+    }
 }
