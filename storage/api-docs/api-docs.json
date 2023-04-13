@@ -92,6 +92,77 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Notebooks/store"
+                ],
+                "summary": "Store notebooks in DB",
+                "description": "Store notebooks in DB",
+                "operationId": "store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "surname",
+                                    "name",
+                                    "patronymic",
+                                    "phone",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "surname": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Иванов"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Иван"
+                                    },
+                                    "patronymic": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Иванович"
+                                    },
+                                    "campaign": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Лукойл"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "89600710772"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "qwe@mail.ru"
+                                    },
+                                    "date_of_birth": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "29.11.1996"
+                                    },
+                                    "image": {
+                                        "type": "file",
+                                        "format": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
             }
         },
         "/api/v1/notebooks/{id}": {
@@ -131,6 +202,88 @@
                                 }
                             }
                         }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Notebooks/update"
+                ],
+                "summary": "Update notebook in DB",
+                "description": "Update notebook in DB",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of Notebook",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "surname",
+                                    "name",
+                                    "patronymic",
+                                    "phone",
+                                    "email"
+                                ],
+                                "properties": {
+                                    "surname": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Иванов"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Иван"
+                                    },
+                                    "patronymic": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Иванович"
+                                    },
+                                    "campaign": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Лукойл"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "89600710772"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "qwe@mail.ru"
+                                    },
+                                    "date_of_birth": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "29.11.1996"
+                                    },
+                                    "image": {
+                                        "type": "file",
+                                        "format": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
                     }
                 }
             }

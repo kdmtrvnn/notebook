@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRequest;
 use App\Http\Transformers\NotebookTransformer;
 use App\Models\Notebook;
 use League\Fractal\Serializer\JsonApiSerializer;
@@ -147,5 +148,101 @@ class NotebookController extends Controller
             ->getData();
 
         return view('notebooks.show', compact('notebook'));
+    }
+
+    public function showViewStore()
+    {
+        return view('notebooks.store');
+    }
+
+    /**
+     * @OA\Post(
+     *      path="/api/v1/notebooks",
+     *      operationId="store",
+     *      tags={"Notebooks/store"},
+     *      summary="Store notebooks in DB",
+     *      description="Store notebooks in DB",
+     *      @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *            required={"surname", "name", "patronymic", "phone", "email"},
+     *            @OA\Property(property="surname", type="string", format="string", example="Иванов"),
+     *            @OA\Property(property="name", type="string", format="string", example="Иван"),
+     *            @OA\Property(property="patronymic", type="string", format="string", example="Иванович"),
+     *            @OA\Property(property="campaign", type="string", format="string", example="Лукойл"),
+     *            @OA\Property(property="phone", type="string", format="string", example="89600710772"),
+     *            @OA\Property(property="email", type="string", format="string", example="qwe@mail.ru"),
+     *            @OA\Property(property="date_of_birth", type="string", format="string", example="29.11.1996"),
+     *            @OA\Property(property="image", type="file", format="file"),
+     *         ),
+     *      ),
+     *     @OA\Response(
+     *          response=200, description="Success",
+     *       )
+     *  )
+     */
+    public function store(StoreRequest $request)
+    {
+        Notebook::create([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'patronymic' => $request->patronymic,
+            'image' => $request->file('image')
+                ? $request->file('image')->store('image', 'public')
+                : null,
+            'campaign' => $request->campaign ? $request->campaign : null,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'date_of_birth' => $request->date_of_birth ? $request->date_of_birth : null,
+        ]);
+
+        return redirect(route('notebooks.get'));
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/v1/notebooks/{id}",
+     *     operationId="update",
+     *     tags={"Notebooks/update"},
+     *     summary="Update notebook in DB",
+     *     description="Update notebook in DB",
+     *     @OA\Parameter(name="id", in="path", description="Id of Notebook", required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *        required=true,
+     *        @OA\JsonContent(
+     *           required={"surname", "name", "patronymic", "phone", "email"},
+     *           @OA\Property(property="surname", type="string", format="string", example="Иванов"),
+     *           @OA\Property(property="name", type="string", format="string", example="Иван"),
+     *           @OA\Property(property="patronymic", type="string", format="string", example="Иванович"),
+     *           @OA\Property(property="campaign", type="string", format="string", example="Лукойл"),
+     *           @OA\Property(property="phone", type="string", format="string", example="89600710772"),
+     *           @OA\Property(property="email", type="string", format="string", example="qwe@mail.ru"),
+     *           @OA\Property(property="date_of_birth", type="string", format="string", example="29.11.1996"),
+     *           @OA\Property(property="image", type="file", format="file"),
+     *     ),
+     *     ),
+     *     @OA\Response(
+     *          response=200, description="Success",
+     *       )
+     *  )
+     */
+    public function update(StoreRequest $request, $id)
+    {
+        Notebook::where('id', $id)->update([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'patronymic' => $request->patronymic,
+            'image' => $request->file('image')
+                ? $request->file('image')->store('image', 'public')
+                : null,
+            'campaign' => $request->campaign ? $request->campaign : null,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'date_of_birth' => $request->date_of_birth ? $request->date_of_birth : null,
+            ]);
+
+        return redirect()->back();
     }
 }

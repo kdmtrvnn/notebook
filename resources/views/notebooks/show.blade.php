@@ -12,20 +12,30 @@
             <div class="row">
                 <div class="col-lg-4 card text-center">
                     <div class="card-body">
-                        <h7 class="fw-normal">
-                            ФИО: {{ $notebook->data->attributes->surname }}
-                            {{ $notebook->data->attributes->name }} {{ $notebook->data->attributes->patronymic }}
-                        </h7><br>
-                        <h7 class="fw-normal"> Компания: {{ $notebook->data->attributes->campaign }} </h7><br>
-                        <h7 class="fw-normal"> Телефон: {{ $notebook->data->attributes->phone }} </h7><br>
-                        <h7 class="fw-normal"> Email: {{ $notebook->data->attributes->email }} </h7><br>
-                        <h7 class="fw-normal">
-                            Дата рождения: {{ $notebook->data->attributes->date_of_birth
-                            ? $notebook->data->attributes->date_of_birth : null }}
-                        </h7>
+                        <form action="{{ route('notebooks.update', ['id' => $notebook->data->id]) }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                            <label>Фамилия:</label>
+                        <input name="surname" class="form-file-input mt-3" value="{{ $notebook->data->attributes->surname }}" /><br>
+                        <label>Имя:</label>
+                        <input name="name" class="form-file-input mt-3" value="{{ $notebook->data->attributes->name }}"><br>
+                        <label>Отчество:</label>
+                        <input name="patronymic" class="form-file-input mt-3" value="{{ $notebook->data->attributes->patronymic }}"><br>
+                        <label>Компания:</label>
+                        <input name="campaign" class="form-file-input mt-3" value="{{ $notebook->data->attributes->campaign }}"><br>
+                        <label>Телефон:</label>
+                            <input name="phone" class="form-file-input mt-3" value="{{ $notebook->data->attributes->phone }}"><br>
+                        <label>Email:</label>
+                        <input name="email" class="form-file-input mt-3" value="{{ $notebook->data->attributes->email }}" ><br>
+                        <label>Дата рождения:</label>
+                        <input name="date_of_birth" class="form-file-input mt-3" value="{{ $notebook->data->attributes->date_of_birth
+                            ? $notebook->data->attributes->date_of_birth : null}}"><br><br>
                         @if($notebook->data->attributes->image !== null)
                             <img src="{{Storage::url($notebook->data->attributes->image)}}" width="200"><br>
                         @endif
+
+                            <input class="form-file-input mt-3" type="file" name="image" accept="image/jpeg,image/png" /><br>
+                            <br><button type="submit">Обновить</button>
+                        </form>
                     </div>
                 </div>
             </div>

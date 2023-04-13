@@ -23,7 +23,17 @@ Route::group(['prefix' => 'v1'], function () {
     Route::group(['prefix' => 'notebooks'], function () {
         Route::get('/', [NotebookController::class, 'get'])
             ->name('notebooks.get');
+
+        Route::get('/store', [NotebookController::class, 'showViewStore'])
+            ->name('notebooks.get_view_create');
+
         Route::get('/{id}', [NotebookController::class, 'show'])
             ->name('notebooks.show');
+
+        Route::post('/', [NotebookController::class, 'store'])
+            ->name('notebooks.store');
+
+        Route::post('/{id}', [NotebookController::class, 'update'])
+            ->name('notebooks.update');
     });
 });
