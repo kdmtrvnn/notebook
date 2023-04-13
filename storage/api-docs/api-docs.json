@@ -1,0 +1,98 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Notebook Api",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/notebooks": {
+            "get": {
+                "tags": [
+                    "Notebooks"
+                ],
+                "summary": "Get list of notebooks",
+                "description": "Get list of notebooks",
+                "operationId": "570b5cac9e8538fba335224a976bb0da",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string"
+                                                    },
+                                                    "surname": {
+                                                        "type": "string"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "patronymic": {
+                                                        "type": "string"
+                                                    },
+                                                    "campaign": {
+                                                        "type": "string"
+                                                    },
+                                                    "phone": {
+                                                        "type": "string"
+                                                    },
+                                                    "email": {
+                                                        "type": "string"
+                                                    },
+                                                    "date_of_birth": {
+                                                        "type": "string"
+                                                    },
+                                                    "image": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "example": [
+                                                {
+                                                    "type": "notebooks",
+                                                    "id": "1",
+                                                    "attributes": {
+                                                        "surname": "Иванов",
+                                                        "name": "Иван",
+                                                        "patronymic": "Иванович",
+                                                        "campaign": "Газпром",
+                                                        "phone": "89600710772",
+                                                        "email": "qwe@mail.ru",
+                                                        "date_of_birth": "29.11.1996",
+                                                        "image": "/public/images"
+                                                    }
+                                                },
+                                                {
+                                                    "type": "notebooks",
+                                                    "id": "2",
+                                                    "attributes": {
+                                                        "surname": "Петров",
+                                                        "name": "Петр",
+                                                        "patronymic": "Петрович",
+                                                        "campaign": "Лукойл",
+                                                        "phone": "89600710772",
+                                                        "email": "asd@mail.ru",
+                                                        "date_of_birth": "29.11.2000",
+                                                        "image": "/public/images"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
