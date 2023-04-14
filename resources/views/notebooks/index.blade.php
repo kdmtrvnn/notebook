@@ -35,8 +35,10 @@
     </div>
 </div>
 @endforeach
-@if(isset($notebooks->links->prev) || isset($notebooks->links->next))
+@if(isset($notebooks->links->prev))
 <a href="{{ $notebooks->links->prev }}">Предыдущая страница</a>&nbsp;&nbsp;
+@endif
+@if(isset($notebooks->links->next))
 <a href="{{ $notebooks->links->next }}">Следующая страница</a>
 @endif
 @else
