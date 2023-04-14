@@ -20,6 +20,13 @@ php artisan migrate --seed
 php artisan serve
 ```
 ___
+
+Swagger docs
+```
+/api/documentation
+```
+
+Routes
 ```
 1.1. GET /api/v1/notebooks/
 1.2. GET /api/v1/notebooks/store
