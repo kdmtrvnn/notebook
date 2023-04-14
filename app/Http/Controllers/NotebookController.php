@@ -6,6 +6,7 @@ use App\Http\Requests\StoreRequest;
 use App\Http\Transformers\NotebookTransformer;
 use App\Models\Notebook;
 use League\Fractal\Serializer\JsonApiSerializer;
+use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 
 /**
  * @OA\Info(
@@ -96,9 +97,11 @@ class NotebookController extends Controller
 
     public function get()
     {
+        $notebooks = Notebook::paginate(5);
         $notebooks = fractal()
-            ->collection(Notebook::get())
+            ->collection($notebooks)
             ->transformWith(new NotebookTransformer())
+            ->paginateWith(new IlluminatePaginatorAdapter($notebooks))
             ->serializeWith(new JsonApiSerializer())
             ->withResourceName('notebooks')
             ->respond()

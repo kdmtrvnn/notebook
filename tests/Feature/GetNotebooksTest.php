@@ -15,8 +15,8 @@ class GetNotebooksTest extends TestCase
         $this->notebook2 = Notebook::factory()->create();
 
         $response = $this->getJson('/api/v1/notebooks');
-        $response->assertStatus(200);
 
+        $response->assertStatus(200);
         $response->assertViewIs('notebooks.index');
         $expectedResponse = (object)[
             'data' => [
@@ -47,8 +47,22 @@ class GetNotebooksTest extends TestCase
                         'date_of_birth' => $this->notebook2->date_of_birth,
                         'image' => $this->notebook2->image,
                     ],
-                ]
-            ]
+                ],
+            ],
+            'meta' => (object)[
+                'pagination' => (object)[
+                    'total' => 2,
+                    'count' => 2,
+                    'per_page' => 5,
+                    'current_page' => 1,
+                    'total_pages' => 1,
+                ],
+            ],
+            'links' => (object)[
+                'self' => route('notebooks.get', ['page' => 1]),
+                'first' => route('notebooks.get', ['page' => 1]),
+                'last' => route('notebooks.get', ['page' => 1]),
+            ],
         ];
         $response->assertViewHas('notebooks', $expectedResponse);
     }
